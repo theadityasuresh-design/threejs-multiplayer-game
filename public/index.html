@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyberOrb 3D | Realtime Multiplayer Arena</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%20width=%22100%22%20height=%22100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Socket.IO Client -->
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <!-- 3D Canvas -->
+    <div id="canvas-container"></div>
+
+    <!-- Top HUD -->
+    <div id="top-hud">
+      <div class="hud-left">
+        <div class="game-title">CYBER ORB 3D</div>
+        <div class="player-count-badge">
+          <span class="pulse-dot"></span>
+          <span id="player-count-text">1 Player Online</span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <div class="score-card">
+          <div class="score-label">ORBS COLLECTED</div>
+          <div class="score-value" id="score-counter">0</div>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <div class="leaderboard-card">
+          <div class="leaderboard-title">LEADERBOARD</div>
+          <div class="leaderboard-list" id="leaderboard-list">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Event Notifications / Toasts -->
+    <div id="notification-box"></div>
+
+    <!-- Bottom Controls Hint -->
+    <div id="bottom-hud">
+      <div class="control-pill"><strong>W / ↑</strong> Forward</div>
+      <div class="control-pill"><strong>S / ↓</strong> Backward</div>
+      <div class="control-pill"><strong>A / ←</strong> Turn Left</div>
+      <div class="control-pill"><strong>D / →</strong> Turn Right</div>
+      <div class="control-pill"><strong>SPACE</strong> Boost</div>
+    </div>
+
+    <!-- Radar Minimap -->
+    <div id="minimap-wrapper">
+      <canvas id="minimap-canvas" width="130" height="130"></canvas>
+    </div>
+
+    <!-- Start / Join Overlay -->
+    <div id="start-overlay">
+      <div class="start-card">
+        <div class="modal-header-badge">Multiplayer Object-Collection Arena</div>
+        <h1 class="start-title">ENTER ARENA</h1>
+        <p class="start-subtitle">Collect glowing orbs, outscore competitors, and dominate the leaderboard</p>
+
+        <div class="name-input-group">
+          <label for="player-name-input">Pilot Call Sign</label>
+          <input type="text" id="player-name-input" maxlength="14" placeholder="Enter your nickname..." autofocus />
+        </div>
+
+        <div class="instructions-box">
+          <ul>
+            <li><span class="icon">🎮</span> Move with <strong>W, A, S, D</strong> or <strong>Arrow Keys</strong></li>
+            <li><span class="icon">✨</span> Drive over glowing orbs to claim points (+10 pts)</li>
+            <li><span class="icon">⏱️</span> Collected orbs respawn in random locations after 3 seconds</li>
+            <li><span class="icon">🌐</span> Real-time authoritative server synchronization</li>
+          </ul>
+        </div>
+
+        <button id="join-btn">JOIN MATCH</button>
+      </div>
+    </div>
+
+    <script type="module" src="./game.js"></script>
+  </body>
+</html>
